@@ -1,0 +1,38 @@
+# 1. Datos crudos y pesados
+data/raw/
+data/processed/
+data/pre_processed/qiime2_workspace/
+
+# 2. Outputs / Resultados de análisis
+outputs/tables/
+outputs/figures/
+outputs/models/
+outputs/logs/
+outputs/function/
+outputs/boruta/
+outputs/lefse/
+outputs/maaslin2/
+outputs/function_contrib/
+
+# 3. Resultados intermedios pesados de herramientas externas
+picrust2_out/
+
+# 4. Recursos externos pesados (clasificadores SILVA, etc.)
+resources/classifiers/
+
+# 5. Archivos temporales de R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rds
+*.rds
+
+# 6. renv: Ignoramos solo los binarios locales pesados, PERO PERMITIMOS renv.lock y la estructura base
+renv/library/
+renv/local/
+renv/staging/
+
+# 7. Metadata del sistema operativo
+.DS_Store
+Thumbs.db

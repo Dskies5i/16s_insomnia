@@ -1,0 +1,38 @@
+---
+title: "bitacora_trabajo_fechas"
+author: "isidoro-sanchez josé alberto"
+date: "2026-10-14"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Cargamos las librerías esenciales para que estén listas en tu bitácora
+library(phyloseq)
+library(ggplot2)
+library(vegan)
+```
+
+## 📅 Entrada: `r format(Sys.Date(), '%d de %B, %Y')`
+
+### 🎯 Objetivo del día
+Verificación inicial del objeto `phyloseq` construido y revisión de las variables de la metadata para el estudio de insomnio.
+
+### 💻 Código Ejecutado
+```{r exploracion-inicial, warning=FALSE}
+# NOW WORKING
+## 1_meta_analysis/02_alpha_diversity.R 
+## 1_meta_analysis/01_build_phyloseq.R
+
+# PENDING to check:
+## 03, 04, 05 y 06...
+```
+
+### 📝 Notas y Resultados
+* El script de construcción de `phyloseq` se ejecutó correctamente de forma desatendida.
+* Se desactivó con éxito el entorno fantasma de Conda en la terminal (`conda deactivate`).

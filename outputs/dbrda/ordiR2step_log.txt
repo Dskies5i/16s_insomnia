@@ -1,0 +1,24 @@
+Call: capscale(formula = bray_dist ~ group, data = meta)
+
+-- Model Summary --
+
+               Inertia Proportion Rank
+Total         43.81569                
+RealTotal     44.90511    1.00000     
+Constrained    0.91325    0.02034    1
+Unconstrained 43.99185    0.97966  110
+Imaginary     -1.08942                
+
+Inertia is squared Unknown distance
+
+-- Eigenvalues --
+
+Eigenvalues for constrained axes:
+  CAP1 
+0.9133 
+
+Eigenvalues for unconstrained axes:
+ MDS1  MDS2  MDS3  MDS4  MDS5  MDS6  MDS7  MDS8 
+6.856 4.096 2.996 1.717 1.570 1.488 1.374 1.220 
+(Showing 8 of 110 unconstrained eigenvalues)
+

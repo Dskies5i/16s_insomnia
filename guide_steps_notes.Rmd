@@ -1,0 +1,114 @@
+---
+title: '#guide_steps_notes'
+author: "isidoro-sanchez josé alberto"
+date: "2026-09-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 16S Microbiome Meta-Analysis Pipeline (Insomnia Studies)
+
+## Workflow Overview & Status
+
+[ Raw FASTQ Data ] ──► [ DADA2 Denoising ] ──► [ Merged Artifacts ]
+│
+[ Taxonomy & Metadata ] ◄── [ SILVA Classification ] ◄─┘
+│
+├──► [ Pending: Filter Non-Bacterial Reads & Low Depth ]
+├──► [ Pending: Global Diversity (Alpha/Beta & PERMANOVA) ]
+├──► [ Pending: Consensus Differential Abundance (4-Method) ]
+└──► [ Pending: PICRUSt2 Functional Pathway Prediction ]
+
+
+---
+
+## 1. Completed Steps
+
+* **SRA Retrieval & Preprocessing:**
+  * Automated download and extraction of raw `.fastq` sequences for 3 distinct study cohorts using `00_install_sra_tools.sh` and `01_download_study_sras.sh`.
+  * Primer trimming and quality checks executed via `03b_qiime_import_and_trim.sh` and `04_viz_quality_plot.sh`.
+* **Denoising & Feature Table Generation:**
+  * DADA2 denoising applied independently per cohort (`05_dada2_denoise_datasets.sh`) to obtain study-level Amplicon Sequence Variants (ASVs).
+* **Dataset Unification & Taxonomy Assignment:**
+  * Merged feature tables and representative sequences across all 3 cohorts using `06_merge_cluster_export.sh`.
+  * Assigned taxonomy strings to unified ASVs using a Naïve Bayes classifier trained on **SILVA 138.1**.
+
+---
+
+## 2. Next Steps & Execution Plan
+
+### Step 1: Master Metadata Standardisation
+Assemble a unified `master_metadata.tsv` mapping all sample IDs across the 3 cohorts with standard headers:
+* `SampleID` | `Group` (Control/Insomnia) | `Age` | `Location` | `Cohort`
+
+### Step 2: Quality & Taxonomic Filtering
+* Filter out non-bacterial contaminants (`mitochondria`, `chloroplast`, `eukaryota`, `unassigned`).
+* Exclude samples with low sequence coverage (**< 10,000 retained reads**).
+
+```bash
+# Filter non-bacterial taxa
+qiime taxa filter-table \
+  --i-table unified_table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-exclude mitochondria,chloroplast,eukaryota,unassigned \
+  --o-filtered-table unified_table_filtered_tax.qza
+
+# Filter samples by metadata and minimum depth
+qiime feature-table filter-samples \
+  --i-table unified_table_filtered_tax.qza \
+  --m-metadata-file master_metadata.tsv \
+  --p-min-frequency 10000 \
+  --o-filtered-table final_filtered_table.qza
+Step 3: Global Diversity Analysis
+Alpha Diversity: Compute Shannon Index on rarefied feature tables.
+
+Beta Diversity: Calculate Bray-Curtis dissimilarity on CLR-transformed tables.
+
+Permutational Multivariate ANOVA: Run PERMANOVA adjusting for covariates (Age + Location + Cohort).
+
+Step 4: Downstream Statistical & Functional Analyses
+4-Method Consensus Pipeline: Run MaAsLin2, db-RDA, Boruta, and LEfSe on CLR-transformed abundance matrices in R/Python to extract robust diagnostic features.
+
+Functional Profiling: Input final_filtered_table.qza and unified_rep_seqs.qza into PICRUSt2 to predict KEGG Ortholog (KO) functional pathways.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## R Markdown INSTRUCTIONS:
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

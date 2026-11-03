@@ -1,0 +1,153 @@
+# ============================================================
+# NOMBRE: 07_dbrda.R
+# DESCRIPCIÓN: Análisis db-RDA y selección de modelos basados en 
+#              distancias con ajuste de covariables y envfit taxonómico.
+# 
+# ¿QUÉ HACE ESTE SCRIPT?
+#    1. Carga los datos usando las funciones estándar del pipeline.
+#    2. Ejecuta selección de modelos escalonados (ordiR2step).
+#    3. Ajusta el modelo db-RDA final por condición y calcula pseudo-R2 y ANOVA.
+#    4. Aplica el análisis envfit original sobre los ASVs filtrados.
+#
+# ARCHIVOS DE ENTRADA (INPUTS):
+#    - outputs/models/physeq_filtered.rds                  (Objeto phyloseq filtrado)
+#    - config/config.yaml                                  (Archivo de configuración)
+#
+# ============================================================
+# NOTAS Y SALIDAS ESPERADAS DE LA EJECUCIÓN:
+# ============================================================
+#
+# 1. MENSAJE "null device 1":
+#    Aparece al ejecutar `dev.off()` tras generar el PDF (`dbrda_sites.pdf`).
+#    Indica que el dispositivo gráfico se cerró y guardó correctamente 
+#    retornando al estado por defecto ("null device"). Es un comportamiento normal.
+#
+# 2. ARCHIVOS GENERADOS EN 'outputs/dbrda/':
+#    - ordiR2step_model.rds                : Objeto R con el modelo de selección stepwise.
+#    - ordiR2step_log.txt                  : Resumen en texto del proceso de selección de variables.
+#    - dbrda_model.rds                     : Modelo db-RDA final ajustado.
+#    - dbrda_anova_all.csv                 : Resultados de ANOVA global del modelo.
+#    - dbrda_anova_margin.csv              : Resultados de ANOVA marginal por variable.
+#    - dbrda_r2.txt                        : Valores de R2 y R2 ajustado del modelo final.
+#    - envfit_significant_otus.csv         : ASVs con p < 0.05 según las permutaciones de envfit.
+#    - envfit_significant_otus_with_taxonomy.csv : ASVs significativos anotados con su taxonomía.
+#    - dbrda_sites.pdf                     : Gráfico de ordenación db-RDA generado y cerrado con dev.off().
+# ============================================================
+#
+#
+# USO: Rscript 1_meta_analysis/07_dbrda_envfit.R
+#
+# TARDA MUCHO EN 8 GB DE RAM
+#
+# ENVIRONMENT: conda activate qiime2-amplicon-2024.5
+# ============================================================
+############ WORKING VERSION (TOOK HOURS!!)
+
+source("1_meta_analysis/00_setup.R")
+source("utils/utils_phyloseq.R")
+source("utils/utils_io.R")
+
+# 1. Primero cargamos la configuración para que 'cfg' esté disponible
+cfg <- yaml::read_yaml("config/config.yaml")
+
+out_dir <- file.path(cfg$outputs$dir, "dbrda")
+dir_create(out_dir)
+
+# 2. Ahora sí, la función encontrará 'cfg' sin problemas
+###==========================================================
+###=========FILTERED VS UNFILTERED=======================
+###==========================================================
+##=============== UNFILTERED ================
+# NOTE: We deliberately use the RAW phyloseq (not physeq_filtered.rds)
+# because db-RDA+envfit benefits from including g__other taxa for 
+# full community analysis. Prevalence filtering (5%) is applied below
+# as a statistical filter, not taxonomic. This differs from Boruta
+# and LEfSe which use physeq_filtered.rds (g__other-filtered).
+physeq <- build_phyloseq()
+pseq <- physeq
+
+
+###==============FILTERED MODEL (COMENT OUT)==========
+# physeq <- readRDS(file.path(cfg$outputs$dir, "models/physeq_filtered.rds"))
+# pseq <- physeq
+
+###==========================================================
+###==========================================================
+# Change this line:
+# dist_method <- cfg$differential$dbrda$distance
+
+# To this:
+dist_method <- cfg$analysis$beta$distance
+bray_dist <- phyloseq::distance(pseq, method = dist_method)
+
+# Convertir explícitamente a data.frame plano para compatibilidad con vegan
+meta <- as.data.frame(as(sample_data(pseq), "data.frame"), stringsAsFactors = FALSE)
+group_col <- cfg$columns$group
+meta[[group_col]] <- factor(meta[[group_col]], levels = cfg$groups$levels)
+
+# Sincronizar muestras con labels en minúscula por seguridad
+common_samples <- intersect(rownames(meta), labels(bray_dist))
+meta <- meta[common_samples, , drop = FALSE]
+bray_dist <- as.dist(as.matrix(bray_dist)[common_samples, common_samples])
+
+# stepwise scope
+scope_covs <- cfg$differential$dbrda$scope_covariates
+mod0 <- stats::as.formula(paste("bray_dist ~", group_col))
+mod1 <- stats::as.formula(paste("bray_dist ~", group_col, "+", paste(scope_covs, collapse = " + ")))
+
+cap0 <- capscale(mod0, data = meta)
+cap1 <- capscale(mod1, data = meta)
+
+step_model <- ordiR2step(cap0, scope = formula(cap1),
+                         direction = "forward", R2scope = TRUE, pstep = cfg$differential$dbrda$permutations)
+
+saveRDS(step_model, file.path(out_dir, "ordiR2step_model.rds"))
+writeLines(capture.output(step_model), con = file.path(out_dir, "ordiR2step_log.txt"))
+
+# Condition modelo
+cond_covs <- cfg$differential$dbrda$condition_covariates
+if (length(cond_covs) > 0) {
+  dbRDA_formula <- stats::as.formula(paste0("bray_dist ~ ", group_col, " + Condition(", paste(cond_covs, collapse = ", "), ")"))
+} else {
+  dbRDA_formula <- stats::as.formula(paste0("bray_dist ~ ", group_col))
+}
+
+dbRDA_model <- capscale(dbRDA_formula, data = meta)
+saveRDS(dbRDA_model, file.path(out_dir, "dbrda_model.rds"))
+
+anova_all <- anova(dbRDA_model, permutations = cfg$differential$dbrda$permutations)
+anova_margin <- anova(dbRDA_model, by = "margin", permutations = cfg$differential$dbrda$permutations)
+
+write_csv_safe(as.data.frame(anova_all) %>% tibble::rownames_to_column("Term"), file.path(out_dir, "dbrda_anova_all.csv"))
+write_csv_safe(as.data.frame(anova_margin) %>% tibble::rownames_to_column("Term"), file.path(out_dir, "dbrda_anova_margin.csv"))
+
+r2 <- RsquareAdj(dbRDA_model)
+writeLines(capture.output(r2), con = file.path(out_dir, "dbrda_r2.txt"))
+
+# envfit: prevalence filter
+otu_mat <- as(otu_table(pseq), "matrix")
+if (!taxa_are_rows(pseq)) otu_mat <- t(otu_mat)
+otu_mat <- t(otu_mat)[common_samples, , drop = FALSE]
+
+prev <- apply(otu_mat, 2, function(x) sum(x > 0) / length(x))
+otu_f <- otu_mat[, prev > cfg$differential$dbrda$prevalence_min, drop = FALSE]
+
+# Respetando la función original de envfit con las permutaciones del config
+fit <- envfit(dbRDA_model, otu_f, perm = cfg$differential$dbrda$permutations)
+fit_scores <- as.data.frame(scores(fit, display = "vectors"))
+fit_scores$pval <- fit$vectors$pvals
+fit_sig <- fit_scores[fit_scores$pval < 0.05 & !is.na(fit_scores$pval), , drop = FALSE]
+fit_sig$OTU_ID <- rownames(fit_sig)
+
+tax_df <- as.data.frame(tax_table(pseq)) %>% tibble::rownames_to_column("OTU_ID")
+fit_sig_annot <- merge(fit_sig, tax_df, by = "OTU_ID")
+
+write_csv_safe(fit_sig, file.path(out_dir, "envfit_significant_otus.csv"))
+write_csv_safe(fit_sig_annot, file.path(out_dir, "envfit_significant_otus_with_taxonomy.csv"))
+
+# 기본 플롯 저장(PDF 권장)
+pdf(file.path(out_dir, "dbrda_sites.pdf"), width = 6, height = 5)
+plot(dbRDA_model, display = "sites", main = "db-RDA")
+dev.off()
+
+cat("✅ Script 07 finalizado exactamente según el diseño original.\n")

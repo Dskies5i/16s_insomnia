@@ -1,0 +1,120 @@
+Downloading datasets with SRA toolkit
+
+-----------------------------------
+##########################################################
+Step 1: Install the SRA Toolkit
+##########################################################
+
+The SRA Toolkit is a set of command-line tools developed by NCBI to download and convert sequencing data.
+
+For macOS/Linux (most common for bioinformatics):
+
+bash
+# Download the latest version (replace with your OS)
+wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz
+tar -vxzf sratoolkit.current-ubuntu64.tar.gz
+# Add the bin directory to your PATH (or use the full path)
+export PATH=$PATH:$PWD/sratoolkit.3.1.1-ubuntu64/bin
+For Windows: You can install the SRA Toolkit via the Windows Subsystem for Linux (WSL) and follow the Linux instructions above, or download the Windows binary from the NCBI SRA Toolkit page.
+
+##########################################################
+Step 2: Find the Run Accession Numbers (SRR)
+##########################################################
+
+A BioProject (PRJNA) contains multiple "Runs" (SRR numbers), each corresponding to one sequenced sample. You need to get the list of SRR numbers for PRJNA882369.
+
+Option A: Use the SRA Run Selector (Web Interface)
+
+Go to the SRA Run Selector: https://www.ncbi.nlm.nih.gov/Traces/study/
+
+Enter PRJNA882369 in the search box.
+
+You will see a table of all runs. Click the "Download" button and select "Accession List". This will download a file named SRR_Acc_List.txt containing all the SRR numbers.
+
+Option B: Use the Command Line (E-utilities)
+
+bash
+# This queries NCBI's E-utilities API to get the run list
+esearch -db sra -query PRJNA882369 | efetch -format runinfo | cut -d ',' -f 1 | grep SRR > SRR_Acc_List.txt
+(Note: You may need to install the edirect package first.)
+
+##########################################################
+Step 3: Download the FASTQ Files
+##########################################################
+
+Once you have the SRR_Acc_List.txt file, use the SRA Toolkit to download and convert the data.
+
+Recommended method (using prefetch + fasterq-dump):
+# 1. Create a directory for the downloaded data
+mkdir -p raw_data/fastq
+
+# 2. Loop through each SRR in the list
+while read -r run_id; do
+    echo "Processing $run_id"
+    # Download the .sra file
+    prefetch "$run_id"
+    # Convert .sra to FASTQ (split paired-end reads, compress output)
+    fasterq-dump "$run_id" --split-files -e 8 -p -O raw_data/fastq/
+    # Optional: compress the FASTQ files to save space
+    gzip raw_data/fastq/"$run_id"*.fastq
+done < SRR_Acc_List.txt
+
+xplanation of flags:
+
+--split-files: Separates paired-end reads into _1.fastq and _2.fastq files.
+
+-e 8: Uses 8 threads for faster processing.
+
+-p: Shows progress.
+
+-O: Output directory.
+
+Alternative (single command, but slower for large datasets):
+
+fastq-dump --split-files --gzip SRR1234567
+
+
+
+##########################################################
+Step 4: Download the Metadata
+##########################################################
+You will also need the metadata (sample information, group labels, etc.) to run the R analysis.
+
+Option A: From the SRA Run Selector
+
+In the SRA Run Selector table, click "Metadata" to download a CSV file containing sample attributes.
+
+Option B: From the publication
+
+E.g. the paper (Chen et al., 2022) should have a supplementary table with the metadata. Check the journal's website or the "Supplementary Materials" link.
+
+Option C: Using the command line
+----------------------------
+esearch -db sra -query PRJNA882369 | efetch -format runinfo > metadata.csv
+-----------------------
+This downloads a CSV with all run information, including sample attributes.
+
+mportant Notes for Your Meta-Analysis
+Study-specific primers: The authors mention removing study-specific primers. When you process the data with QIIME2, you will need to know the primer sequences used in this study (V3-V4 region). These are usually listed in the paper's Methods section.
+
+Metadata standardization: When you create your unified metadata file (as discussed earlier), make sure to add a Set column (e.g., "Chen_2022") to distinguish this study from others.
+
+File sizes: 16S rRNA datasets are usually manageable (a few GB per study), but downloading 30+ samples may take some time depending on your internet connection
+
+
+##########################################################
+##########################################################
+
+
+
+
+
+##########################################################
+##########################################################
+
+
+
+
+
+##########################################################
+##########################################################

@@ -1,0 +1,141 @@
+sample-id	study_id	library_name	sample_accession	sex	age	tissue	biomaterial_provider	group_detailed	group	BMI	ISI	ISI_cat	SE	GDS_SUM	SAST_SUM
+#q2:types	categorical	categorical	categorical	categorical	numeric	categorical	categorical	categorical	categorical						
+SRR22257367	chen_2022	A2	SRS15729977	female	26.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257368	chen_2022	A17	SRS15729976	female	64.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257369	chen_2022	A16	SRS15729975	female	35.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257370	chen_2022	A15	SRS15729974	female	49.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257371	chen_2022	C6	SRS15729973	male	57.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257372	chen_2022	A14	SRS15729972	male	35.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257373	chen_2022	C4	SRS15729971	female	59.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257374	chen_2022	C3	SRS15729970	female	63.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257375	chen_2022	C2	SRS15729969	female	39.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257376	chen_2022	C1	SRS15729968	male	37.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257377	chen_2022	B9	SRS15729967	female	42.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257378	chen_2022	B8	SRS15729966	male	49.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257379	chen_2022	B7	SRS15729965	female	32.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257380	chen_2022	B6	SRS15729964	male	35.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257381	chen_2022	B4	SRS15729963	female	49.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257382	chen_2022	A13	SRS15729962	male	65.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257383	chen_2022	B3	SRS15729961	female	41.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257384	chen_2022	B29	SRS15729960	female	50.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257385	chen_2022	B28	SRS15729959	female	63.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257386	chen_2022	B27	SRS15729958	female	56.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257387	chen_2022	B25	SRS15729957	female	48.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257388	chen_2022	B24	SRS15729956	female	40.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257389	chen_2022	B23	SRS15729955	female	23.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257390	chen_2022	B22	SRS15729954	female	40.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257391	chen_2022	B21	SRS15729953	female	42.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257392	chen_2022	A12	SRS15729952	female	50.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257393	chen_2022	B20	SRS15729951	female	63.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257394	chen_2022	B2	SRS15729950	female	52.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257395	chen_2022	B19	SRS15729949	female	55.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257396	chen_2022	B18	SRS15729948	male	23.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257397	chen_2022	B17	SRS15729947	female	50.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257398	chen_2022	B16	SRS15729946	male	38.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257399	chen_2022	B15	SRS15729945	female	24.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257400	chen_2022	B14	SRS15729944	male	31.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257401	chen_2022	B13	SRS15729943	female	24.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257402	chen_2022	B12	SRS15729942	female	45.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257403	chen_2022	A11	SRS15729941	female	30.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257404	chen_2022	B11	SRS15729940	female	50.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257405	chen_2022	B10	SRS15729939	male	28.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257406	chen_2022	B1	SRS15729938	female	21.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257407	chen_2022	A9	SRS15729937	female	21.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257408	chen_2022	A7	SRS15729936	female	65.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257409	chen_2022	A6	SRS15729935	female	30.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257410	chen_2022	A4	SRS15729934	female	28.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257411	chen_2022	A3	SRS15729933	male	23.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257412	chen_2022	A10	SRS15729932	male	26.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR22257413	chen_2022	A1	SRS15729931	female	23.0	stool	Guangdong Second Provincial General Hospital	Insomnia	Insomnia						
+SRR19449682	haimov_2022	386-7	SRS13217686	male	80.0	stool	MIGAL	Insomnia	Insomnia	30.6	15.0	3.0	72.91	1.0	19.0
+SRR19449683	haimov_2022	F-33B	SRS13217685	female	67.0	stool	MIGAL	Insomnia	Insomnia	22.27	23.0	4.0	83.21	1.0	26.0
+SRR19449684	haimov_2022	298500-207A	SRS13217684	female	68.0	stool	MIGAL	Insomnia	Insomnia	27.59	14.0	2.0	84.02	4.0	19.0
+SRR19449685	haimov_2022	298500-206A	SRS13217683	female	72.0	stool	MIGAL	Insomnia	Insomnia	35.0	16.0	3.0	81.89	1.0	17.0
+SRR19449686	haimov_2022	261689-125A	SRS13217682	female	68.0	stool	MIGAL	Insomnia	Insomnia	27.97	9.0	2.0	66.3	2.0	22.0
+SRR19449687	haimov_2022	722-07A	SRS13217681	female	78.0	stool	MIGAL	Insomnia	Insomnia	28.7	9.0	2.0	77.86	4.0	27.0
+SRR19449688	haimov_2022	261689-124A	SRS13217680	male	69.0	stool	MIGAL	Insomnia	Insomnia	27.97	18.0	3.0	82.13	5.0	17.0
+SRR19449689	haimov_2022	F-122A	SRS13217679	female	72.0	stool	MIGAL	Insomnia	Insomnia	29.38	18.0	3.0	81.45	4.0	22.0
+SRR19449690	haimov_2022	F-109A	SRS13217678	female	71.0	stool	MIGAL	Insomnia	Insomnia	23.8	11.0	2.0	75.85	4.0	17.0
+SRR19449691	haimov_2022	282-108A	SRS13217677	female	80.0	stool	MIGAL	Control	Control	28.04	15.0	3.0	85.22	2.0	17.0
+SRR19449692	haimov_2022	282-107A	SRS13217676	male	83.0	stool	MIGAL	Insomnia	Insomnia	23.23	15.0	3.0	81.8	4.0	20.0
+SRR19449693	haimov_2022	F-104A	SRS13217675	male	70.0	stool	MIGAL	Control	Control	21.63	10.0	2.0	85.21	9.0	19.0
+SRR19449694	haimov_2022	282-103A	SRS13217674	female	72.0	stool	MIGAL	Control	Control	32.45	9.0	2.0	85.57	0.0	14.0
+SRR19449695	haimov_2022	F-102A	SRS13217673	male	86.0	stool	MIGAL	Insomnia	Insomnia	21.63	11.0	2.0	82.72	2.0	14.0
+SRR19449696	haimov_2022	301-4	SRS13217672	female	69.0	stool	MIGAL	Control	Control	38.77	9.0	2.0	88.88	2.0	22.0
+SRR19449697	haimov_2022	300-93A	SRS13217671	female	70.0	stool	MIGAL	Insomnia	Insomnia	28.33	18.0	3.0	84.79		
+SRR19449698	haimov_2022	193-Cl-4	SRS13217670	female	77.0	stool	MIGAL	Control	Control	28.2	17.0	3.0	85.01	3.0	15.0
+SRR19449699	haimov_2022	228-92A	SRS13217669	female	73.0	stool	MIGAL	Control	Control	19.63	5.0	1.0	85.3	8.0	21.0
+SRR19449700	haimov_2022	228-90A	SRS13217668	female	77.0	stool	MIGAL	Insomnia	Insomnia	23.53	15.0	3.0	78.35	7.0	24.0
+SRR19449701	haimov_2022	301-3	SRS13217667	female	75.0	stool	MIGAL	Insomnia	Insomnia	30.08	20.0	3.0	84.7	2.0	18.0
+SRR19449702	haimov_2022	301-2	SRS13217666	female	73.0	stool	MIGAL	Insomnia	Insomnia	31.25	8.0	2.0	84.19	6.0	25.0
+SRR19449703	haimov_2022	301-1	SRS13217665	female	69.0	stool	MIGAL	Insomnia	Insomnia	31.16	21.0	3.0	74.36	3.0	19.0
+SRR19449704	haimov_2022	886-85A	SRS13217664	female	68.0	stool	MIGAL	Control	Control	19.57	11.0	2.0	85.72	0.0	16.0
+SRR19449705	haimov_2022	300-83A	SRS13217663	female	73.0	stool	MIGAL	Insomnia	Insomnia	27.8	12.0	2.0	84.1	1.0	17.0
+SRR19449706	haimov_2022	447-A	SRS13217662	female	70.0	stool	MIGAL	Insomnia	Insomnia	26.65	5.0	1.0	84.17	2.0	22.0
+SRR19449707	haimov_2022	257-74A	SRS13217661	female	92.0	stool	MIGAL	Insomnia	Insomnia	23.8	16.0	3.0	82.09	3.0	28.0
+SRR19449708	haimov_2022	507-71-A	SRS13217660	female	78.0	stool	MIGAL	Insomnia	Insomnia	24.2	21.0	3.0	74.19	1.0	16.0
+SRR19449709	haimov_2022	386-4	SRS13217659	female	70.0	stool	MIGAL	Insomnia	Insomnia	22.96	11.0	2.0	79.13	2.0	24.0
+SRR19449710	haimov_2022	257-69A	SRS13217658	male	71.0	stool	MIGAL	Insomnia	Insomnia	30.7	11.0	2.0	66.49	6.0	17.0
+SRR19449711	haimov_2022	205-64A	SRS13217657	female	76.0	stool	MIGAL	Insomnia	Insomnia	48.0	17.0	3.0	78.33	1.0	18.0
+SRR19449712	haimov_2022	193-Cl-2	SRS13217656	female	79.0	stool	MIGAL	Control	Control	28.2	17.0	3.0	85.01	3.0	15.0
+SRR19449713	haimov_2022	386-14	SRS13217655	female	79.0	stool	MIGAL	Control	Control	26.28	11.0	2.0	88.84	0.0	19.0
+SRR19449714	haimov_2022	386-13	SRS13217654	male	80.0	stool	MIGAL	Insomnia	Insomnia	23.7	7.0	1.0	78.11	0.0	19.0
+SRR19449715	haimov_2022	895-54A	SRS13217653	female	75.0	stool	MIGAL	Insomnia	Insomnia	19.81	18.0	3.0	73.9	0.0	18.0
+SRR19449716	haimov_2022	386-11	SRS13217652	male	73.0	stool	MIGAL	Insomnia	Insomnia	24.5	7.0	1.0	75.5	1.0	21.0
+SRR19449717	haimov_2022	722-044A	SRS13217651	male	70.0	stool	MIGAL	Insomnia	Insomnia	30.7	9.0	2.0	80.9	8.0	21.0
+SRR19449718	haimov_2022	257-31A	SRS13217650	male	81.0	stool	MIGAL	Insomnia	Insomnia	23.18	18.0	3.0	63.57		
+SRR19449719	haimov_2022	300544-202A	SRS13217649	female	69.0	stool	MIGAL	Insomnia	Insomnia	25.0	13.0	2.0	51.08	0.0	18.0
+SRR19449720	haimov_2022	298500-196A	SRS13217648	female	73.0	stool	MIGAL	Insomnia	Insomnia	30.47	10.0	2.0	83.75	2.0	16.0
+SRR19449721	haimov_2022	295836-195A	SRS13217647	female	72.0	stool	MIGAL	Insomnia	Insomnia	27.51	13.0	2.0	82.72	0.0	17.0
+SRR19449722	haimov_2022	295836-192A	SRS13217646	female	67.0	stool	MIGAL	Insomnia	Insomnia	23.88	13.0	2.0	76.19	1.0	17.0
+SRR19449723	haimov_2022	288534-186-A	SRS13217645	female	76.0	stool	MIGAL	Control	Control	30.84	7.0	1.0	88.30571	0.0	20.0
+SRR19449724	haimov_2022	288534-185-A	SRS13217644	female	83.0	stool	MIGAL	Insomnia	Insomnia	22.2	17.0	3.0	83.95846	8.0	18.0
+SRR19449725	haimov_2022	285464-184-A	SRS13217643	female	82.0	stool	MIGAL	Insomnia	Insomnia	33.1	19.0	3.0	77.855	1.0	20.0
+SRR19449726	haimov_2022	285464-179-A	SRS13217642	female	69.0	stool	MIGAL	Insomnia	Insomnia	22.8	15.0	3.0	75.49833	3.0	22.0
+SRR19449727	haimov_2022	284021-175-A	SRS13217641	female	73.0	stool	MIGAL	Control	Control	29.9	7.0	1.0	87.94	4.0	19.0
+SRR19449728	haimov_2022	282636-171A	SRS13217640	female	71.0	stool	MIGAL	Insomnia	Insomnia	36.73	10.0	2.0	81.13333	0.0	16.0
+SRR19449729	haimov_2022	193-Cl-8	SRS13217639	female	67.0	stool	MIGAL	Control	Control	28.2	17.0	3.0	85.01	3.0	15.0
+SRR19449730	haimov_2022	279994-170A	SRS13217638	male	68.0	stool	MIGAL	Insomnia	Insomnia	26.2	14.0	2.0	75.73	2.0	17.0
+SRR19449731	haimov_2022	284021-169-A	SRS13217637	female	79.0	stool	MIGAL	Control	Control	26.89	16.0	3.0	86.99	1.0	17.0
+SRR19449732	haimov_2022	279994-168A	SRS13217636	female	71.0	stool	MIGAL	Insomnia	Insomnia	37.65	12.0	2.0	81.21	3.0	18.0
+SRR19449733	haimov_2022	278616-164A	SRS13217635	female	71.0	stool	MIGAL	Insomnia	Insomnia	40.9	12.0	2.0	84.56083	3.0	14.0
+SRR19449734	haimov_2022	278616-163A	SRS13217634	female	70.0	stool	MIGAL	Insomnia	Insomnia	23.83	9.0	2.0	84.38	0.0	22.0
+SRR19449735	haimov_2022	275281-160B	SRS13217633	male	93.0	stool	MIGAL	Insomnia	Insomnia	24.51	13.0	2.0	66.33	1.0	17.0
+SRR19449736	haimov_2022	274161-158A	SRS13217632	female	76.0	stool	MIGAL	Insomnia	Insomnia	34.38	5.0	1.0	79.44	4.0	22.0
+SRR19449737	haimov_2022	276490-157A	SRS13217631	female	67.0	stool	MIGAL	Insomnia	Insomnia	28.34	17.0	3.0	83.48	7.0	19.0
+SRR19449738	haimov_2022	274161-145A	SRS13217630	female	73.0	stool	MIGAL	Insomnia	Insomnia	28.73	12.0	2.0	76.73	11.0	22.0
+SRR19449739	haimov_2022	261689-143A	SRS13217629	female	73.0	stool	MIGAL	Insomnia	Insomnia	27.73	13.0	2.0	83.21	3.0	16.0
+SRR19449740	haimov_2022	386-6	SRS13217628	male	76.0	stool	MIGAL	Insomnia	Insomnia	22.8	14.0	2.0	68.28	3.0	23.0
+SRR19449741	haimov_2022	261689-139A	SRS13217627	female	70.0	stool	MIGAL	Insomnia	Insomnia	30.49	11.0	2.0	80.52	0.0	18.0
+SRR19449742	haimov_2022	261689-137A	SRS13217626	male	68.0	stool	MIGAL	Insomnia	Insomnia	25.13	18.0	3.0	74.5	2.0	19.0
+SRR19449743	haimov_2022	260788-5	SRS13217625	female	67.0	stool	MIGAL	Insomnia	Insomnia	27.92	15.0	3.0	86.91	3.0	18.0
+SRR19449744	haimov_2022	284021-134-A	SRS13217624	female	70.0	stool	MIGAL	Insomnia	Insomnia	28.33	13.0	2.0	82.35	1.0	23.0
+SRR19449745	haimov_2022	261689-133A	SRS13217623	female	72.0	stool	MIGAL	Insomnia	Insomnia	41.23	12.0	2.0	67.67273	1.0	23.0
+SRR19449746	haimov_2022	261689-132A	SRS13217622	female	69.0	stool	MIGAL	Insomnia	Insomnia	24.61	17.0	3.0	76.89	6.0	25.0
+SRR19449747	haimov_2022	F-129A	SRS13217621	female	66.0	stool	MIGAL	Control	Control	24.09	19.0	3.0	85.9	2.0	19.0
+SRR19449748	haimov_2022	282-1218A	SRS13217620	male	66.0	stool	MIGAL	Insomnia	Insomnia	36.66	4.0	1.0	78.42	1.0	17.0
+SRR19449749	haimov_2022	421-1	SRS13217619	female	68.0	stool	MIGAL	Insomnia	Insomnia	21.26	18.0	3.0	82.87	4.0	20.0
+SRR19449750	haimov_2022	507-43-B	SRS13217618	male	75.0	stool	MIGAL	Insomnia	Insomnia	34.19	10.0	2.0	73.19	0.0	12.0
+SRR19449751	haimov_2022	193-Cl-6	SRS13217617	female	68.0	stool	MIGAL	Control	Control	28.2	17.0	3.0	85.01	3.0	15.0
+SRR19449752	haimov_2022	386-3	SRS13217616	female	69.0	stool	MIGAL	Insomnia	Insomnia	25.6	14.0	2.0	81.77	2.0	21.0
+SRR19449753	haimov_2022	507-01-B	SRS13217615	female	69.0	stool	MIGAL	Insomnia	Insomnia	34.6	9.0	2.0	81.6	1.0	19.0
+SRR8750986	liub_2019	normal_3	SRS4507608					Control	Control						
+SRR8750987	liub_2019	normal_4	SRS4507607					Control	Control						
+SRR8750988	liub_2019	normal_1	SRS4507606					Control	Control						
+SRR8750989	liub_2019	normal_2	SRS4507605					Control	Control						
+SRR8750990	liub_2019	normal_7	SRS4507604					Control	Control						
+SRR8750991	liub_2019	normal_8	SRS4507603					Control	Control						
+SRR8750992	liub_2019	normal_5	SRS4507602					Control	Control						
+SRR8750993	liub_2019	normal_6	SRS4507601					Control	Control						
+SRR8750994	liub_2019	normal_9	SRS4507600					Control	Control						
+SRR8750995	liub_2019	normal_10	SRS4507599					Control	Control						
+SRR8750996	liub_2019	insomnia_3	SRS4507598					Insomnia	Insomnia						
+SRR8750997	liub_2019	insomnia_4	SRS4507597					Insomnia	Insomnia						
+SRR8750998	liub_2019	insomnia_1	SRS4507596					Insomnia	Insomnia						
+SRR8750999	liub_2019	insomnia_2	SRS4507595					Insomnia	Insomnia						
+SRR8751000	liub_2019	insomnia_7	SRS4507594					Insomnia	Insomnia						
+SRR8751001	liub_2019	insomnia_8	SRS4507593					Insomnia	Insomnia						
+SRR8751002	liub_2019	insomnia_5	SRS4507592					Insomnia	Insomnia						
+SRR8751003	liub_2019	insomnia_6	SRS4507591					Insomnia	Insomnia						
+SRR8751004	liub_2019	insomnia_9	SRS4507590					Insomnia	Insomnia						
+SRR8751005	liub_2019	insomnia_10	SRS4507589					Insomnia	Insomnia						

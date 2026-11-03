@@ -1,0 +1,236 @@
+# MYCONFIG
+#16s_insomnia/config/config.yaml
+project:
+  seed: 610
+
+columns:
+  otu_id: "OTU"
+  sample_id: "sample-id"
+  group: "group"
+
+groups:
+  levels: ["Control", "Insomnia"]
+  colors:
+    Control: "#2b5c8f"
+    Insomnia: "#d95f02"
+
+input:
+  taxonomy: "data/pre_processed/unified/taxonomy.tsv"
+  otu: "data/pre_processed/unified/unified_otu_table.tsv"
+  metadata: "data/pre_processed/unified/master_metadata_unified.tsv"
+  picrust_ko: "outputs/tables/merged_KO_metagenome.tsv"
+
+outputs:
+  dir: "outputs"
+
+analysis:
+  alpha:
+    measures: ["Shannon", "Simpson"]
+    test: "t.test"
+  beta:
+    distance: "bray"
+    permanova_permutations: 999
+    covariates: ["study_id", "sex", "age"]
+  fb_ratio:
+    phylum_a: "Firmicutes"
+    phylum_b: "Bacteroidota"
+
+differential:
+  boruta:
+    maxRuns: 100
+    doTrace: 2
+    covariates: ["study_id", "age"]
+    otu_prefix: "OTU_"
+  maaslin2:
+    fixed_effects: ["group", "study_id", "age"]
+    output_dir: "maaslin2"
+  dbrda:
+    distance: "bray"
+    condition_covariates: ["study_id", "age"]
+    scope_covariates: ["age", "sex", "study_id"]
+    prevalence_min: 0.05
+    permutations: 999
+  lefse:
+    group: "group"
+    rank_filter: "Genus" #was "Species"
+    p_max: 0.05
+    lda_min: 2
+    drop_tax_pattern: "s__other"
+
+function:
+  inputs:
+    ko_edges: "outputs/function/tables/taxon_ko_edges_filtered.csv" #
+      #ko_edges: "outputs/tables/cytoscape_edges.csv"      # Points to your output edges file
+      #The original authors' cytoscape_edges.csv was just their manual export of the filtered correlation table so they could open it in Cytoscape.
+      #In your pipeline, 10_function_taxa_ko_cor.R is the script that generates the exact same data. It outputs outputs/function/tables/taxon_ko_edges_filtered.csv.
+
+    picrust_ko: "outputs/tables/merged_KO_metagenome.tsv"  # Points to your PICRUSt2 KO table
+  transform:          # <-- Agrega esta sección
+    log_base: 2       # o exp (según prefieras)
+    pseudocount: 1  
+  
+  target_taxa:
+    genus:
+      - "g__Burkholderia-Caballeronia-Paraburkholderia"
+      - "g__Bilophila"
+      - "g__Lachnoclostridium"
+      - "g__[Ruminococcus]_gnavus_group"
+      - "g__Coprococcus"
+    species:
+      - "s__Bacteroides_vulgatus"
+      - "s__Bacteroides_caccae"
+      - "s__Ruminococcus_callidus"
+
+  correlation:
+    method: "spearman" # Ensure correlation method is explicitly defined here if needed by script 10
+    p_max: 0.05
+    abs_rho_min: 0.5
+    fdr: "BH" # Matches script 10's fdr_method call
+
+
+##NEW
+function_contrib:
+  inputs:
+    metadata_for_taxa:   "outputs/tables/metadata_for_taxa.csv"
+    taxonomy_filled:     "outputs/tables/picrust_taxonomy_filled.csv"
+    ko_contrib_filtered: "outputs/tables/ko_contrib_filtered.csv"
+    cytoscape_edges:     "outputs/function/tables/taxon_ko_edges_filtered.csv"
+    ko_fc_group:         "outputs/tables/KO_FC_group.csv"
+  output:
+    dir: "outputs/function_contrib"
+  plot:
+    base_size: 11
+  targets:
+    taxa:
+      - "g__Burkholderia-Caballeronia-Paraburkholderia"
+      - "g__Bilophila"
+      - "g__Lachnoclostridium"
+      - "g__[Ruminococcus]_gnavus_group"
+      - "g__Coprococcus"
+
+### previous  
+# function_contrib:
+#   metadata_for_taxa:   "outputs/tables/metadata_for_taxa.csv"
+#   taxonomy_filled:     "outputs/tables/picrust_taxonomy_filled.csv"
+#   ko_contrib_filtered: "outputs/tables/ko_contrib_filtered.csv"
+#   cytoscape_edges:     "outputs/function/tables/taxon_ko_edges_filtered.csv"
+#   ko_fc_group:         "outputs/tables/KO_FC_group.csv"
+#   
+##---------------##---------------##---------------##---------------
+##---------------##---------------##---------------##---------------
+##---------------##---------------##---------------##---------------
+# WORKED FOR SCRIPTS 1-9
+# function_contrib:
+#   metadata_for_taxa: "PATH/contribution_calculation/metadata_for_taxa.csv"
+#   taxonomy_filled: "PATH/picrust_taxonomy_filled.csv"
+#   ko_contrib_filtered: "PATH/ko_contrib_filtered.csv"
+#   cytoscape_edges: "PATH/cytoscape_edges.csv"
+#   ko_fc_group: "PATH/KO_FC_group.csv"
+
+###---------------------
+
+# 
+# * ENVIRONMENT: conda activate qiime2-amplicon-2024.5
+# 
+# ```text
+# 16s_insomnia/
+# ├── config
+# │   ├── config.yaml    <-- Archivo de configuración central
+# |
+# ├── 0_preprocessing/
+# │   ├── config/
+# │   │   └── datasets_config.tsv   <-- Dynamic parameters (primers, truncation, layout)
+# │   │
+# │   ├── script_drafts_ideas/                <-- Drafts and experimental tests
+# │   ├── utils/                              <-- Support scripts and auxiliary utilities
+# │   └── scripts/
+# │       ├── 00_install_sra_tools.sh         <-- SRA tools installation
+# │       ├── 01_download_silva_classifier.sh <-- SILVA classifier download (Full-Length)
+# │       ├── 01_download_study_sras_w_metadata.sh <-- Raw FASTQ and SRA metadata download
+# │       ├── 01_install_qiime2.sh            <-- QIIME 2 environment setup
+# │       ├── 02_metadata_qiime2_format.sh    <-- Base metadata formatting for QIIME 2
+# │       ├── 03_merge_study_w_downloaded_metadata.py <-- Enrich and harmonize clinical metadata (ISI, BMI, etc.)
+# │       ├── 04_qiime_import_and_trim.sh     <-- FASTQ import and primer removal (Cutadapt)
+# │       ├── 04_viz_quality_plot.sh          <-- .qzv generation for quality inspection
+# │       ├── 05_dada2_denoise_datasets.sh    <-- Denoising and error correction with DADA2 (dynamic Paired/Single)
+# │       ├── 05b_visualize_denoise_stats.sh  <-- Statistical summary of DADA2 process
+# │       ├── 06_merge_cluster_export.sh      <-- Merge, VSEARCH 99% clustering, SILVA taxonomy, and R export
+# │       ├── 06b_visualize_unified_table.sh  <-- Generates summary visualization of unified table (.qzv)
+# │       └── 06D_build_master_metadata.py    <-- Builds final master metadata table (master_metadata_unified.tsv)
+# │
+# │
+# ├── utils/                                <-- FUNCIONES AUXILAIRES DE R       
+# │   ├── utils_io.R
+# |   ├── utils_phyloseq.R
+# |   ├── utils_plot.R
+# │   ├── utils_stats.R
+# │   
+# ├── 1_meta_analysis/
+# │   
+# ├── data/
+# │   ├── pre_processed/
+# │   │   ├── metadata/                       <-- Formatted (*_q2.tsv) and enriched (*_format_enriched.tsv) metadata
+# │   │   └── unified/                        <-- Inputs for metanalysis: unified_otu_table.tsv, 
+# │   │                                            taxonomy.tsv, master_metadata_unified.tsv, 
+# │   │                                            unified_rep_seqs.fasta
+# │   │
+# │   └── raw/                                <-- Raw FASTQs per study and supplementary tables
+# └── resources/                              <-- SILVA classifiers and external resources
+# │   
+# │
+# ├── outputs/ ## DEBERIA GUARDAR RESULTADOS DE METAANALYSIS AQUÍ O EN DATA/META_ANALYSIS??
+# │   ├── tables/
+# |   ├── models/
+# |   ├── logs/
+# │   ├── figures/
+# 
+# |
+# ├── .gitignore
+# │   
+# ├── .Rhisttory
+# │
+# ```
+
+##################################
+#### OLD CONFIG
+# #16s_insomnia/config/config.yaml
+# project:
+#   seed: 610
+# 
+# columns:
+#   otu_id: "OTU_ID"
+#   sample_id: "sample-id"
+#   group: "group"
+# 
+# groups:
+#   levels: ["Control", "Insomnia"]
+#   colors:
+#     Control: "#2b5c8f"
+#     Insomnia: "#d95f02"
+# 
+# input:
+#   taxonomy: "data/pre_processed/unified/taxonomy.tsv"
+#   otu: "data/pre_processed/unified/unified_otu_table.tsv"
+#   metadata: "data/pre_processed/unified/master_metadata_unified.tsv"
+#   picrust_ko: "outputs/tables/merged_KO_metagenome.tsv"
+# 
+# outputs:
+#   dir: "outputs"
+# 
+# analysis:
+#   alpha:
+#     measures: ["Shannon", "Simpson"]
+#     test: "t.test"
+#   beta:
+#     distance: "bray"
+#     permanova_permutations: 999
+#     covariates: ["study_id", "sex", "age"]
+#   fb_ratio:
+#     phylum_a: "Firmicutes"
+#     phylum_b: "Bacteroidota"
+    
+    
+#--------------------------------------
+# Remember to Install YAML
+#--------------------------
+# Rscript -e "install.packages(c('yaml', 'fs', 'readr', 'dplyr', 'tidyr', 'tibble', 'ggplot2'), repos='https://cloud.r-project.org')"
